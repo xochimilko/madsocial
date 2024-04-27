@@ -11,6 +11,7 @@ dependencies:
   firebase_core: ^2.30.0
   flutter:
     sdk: flutter
+  news_api_flutter_package: ^1.2.0
 
 dev_dependencies:
   flutter_test:
