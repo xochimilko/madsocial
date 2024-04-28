@@ -12,6 +12,8 @@ class AuthService {
       UserCredential userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
 
+
+
       // Create a new document for the user in the 'users' collection
       await _firestore.collection('users').doc(userCredential.user!.uid).set({
         'uid': userCredential.user!.uid,
@@ -28,6 +30,7 @@ class AuthService {
         } else {
           return e.message;
         }
+
       } else {
         return e.toString();
       }
@@ -38,7 +41,10 @@ class AuthService {
     required String email,
     required String password,
   }) async {
+    print('Entering login function');
     try {
+
+
       UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
 
@@ -64,6 +70,7 @@ class AuthService {
       } else {
         return e.toString();
       }
+
     }
   }
 }

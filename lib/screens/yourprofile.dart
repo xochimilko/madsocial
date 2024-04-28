@@ -9,6 +9,10 @@ class _YourProfileScreenState extends State<YourProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(title: Text('Your Profile')),
-        body: Center(child: Text('Your profile')));
+        body: Center(
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Text('this is child'),
+          ]),
+        ));
   }
 }
