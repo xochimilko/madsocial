@@ -1,27 +1,39 @@
-//contains all functions related to auth
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-//class contains functions related to firebase auth
 class AuthService {
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
   Future<String?> registration({
     required String email,
     required String password,
   }) async {
     try {
-      await FirebaseAuth.instance
+      UserCredential userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
 
-      return 'success';
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak password') {
-        return 'The password you provided is too weak. Try again';
-      } else if (e.code == 'email-already-in-use') {
-        return 'An account already exists for this email';
-      } else {
-        return e.message;
-      }
+
+
+      // Create a new document for the user in the 'users' collection
+      await _firestore.collection('users').doc(userCredential.user!.uid).set({
+        'uid': userCredential.user!.uid,
+        'email': email,
+      });
+
+      return 'Success';
     } catch (e) {
-      return e.toString();
+      if (e is FirebaseAuthException) {
+        if (e.code == 'weak-password') {
+          return 'The password you provided is too weak. Try again';
+        } else if (e.code == 'email-already-in-use') {
+          return 'An account already exists for this email';
+        } else {
+          return e.message;
+        }
+
+      } else {
+        return e.toString();
+      }
     }
   }
 
@@ -31,25 +43,35 @@ class AuthService {
   }) async {
     print('Entering login function');
     try {
-      final credential = await FirebaseAuth.instance
+
+
+      UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
 
-      print(credential?.user?.uid);
-      print('/n');
-      return credential.toString();
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        return 'No user found for email provided';
-      } else if (e.code == 'wrong-password') {
-        return 'Incorrect password';
-      } else {
-        print('error message1');
-        print('/n unknown error');
-        return e.message;
+      // Check if the user document exists, if not, create one
+      DocumentSnapshot userDoc = await _firestore.collection('users').doc(userCredential.user!.uid).get();
+      if (!userDoc.exists) {
+        await _firestore.collection('users').doc(userCredential.user!.uid).set({
+          'uid': userCredential.user!.uid,
+          'email': email,
+        });
       }
+
+      return 'Success';
     } catch (e) {
-      print('error message2');
-      return e.toString();
+      if (e is FirebaseAuthException) {
+        if (e.code == 'user-not-found') {
+          return 'No user found for email provided';
+        } else if (e.code == 'wrong-password') {
+          return 'Incorrect password';
+        } else {
+          return e.message;
+        }
+      } else {
+        return e.toString();
+      }
+
     }
   }
 }
+
