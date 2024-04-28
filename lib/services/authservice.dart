@@ -43,7 +43,10 @@ class AuthService {
           .signInWithEmailAndPassword(email: email, password: password);
 
       // Check if the user document exists, if not, create one
-      DocumentSnapshot userDoc = await _firestore.collection('users').doc(userCredential.user!.uid).get();
+      DocumentSnapshot userDoc = await _firestore
+          .collection('users')
+          .doc(userCredential.user!.uid)
+          .get();
       if (!userDoc.exists) {
         await _firestore.collection('users').doc(userCredential.user!.uid).set({
           'uid': userCredential.user!.uid,
@@ -67,4 +70,3 @@ class AuthService {
     }
   }
 }
-
