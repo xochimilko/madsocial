@@ -40,11 +40,6 @@ class _MainContainerState extends State<MainContainer> {
               selectedIcon: Icon(Icons.newspaper_outlined),
               label: 'News'),
           NavigationDestination(
-            selectedIcon: Icon(Icons.person_outline),
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
-          NavigationDestination(
               icon: Icon(Icons.chat),
               selectedIcon: Icon(Icons.chat),
               label: 'Chat')
@@ -54,9 +49,11 @@ class _MainContainerState extends State<MainContainer> {
         HomeScreen(),
         CreatePostScreen(),
         NewsScreen(),
-        YourProfileScreen(),
-        ChatScreen(receiverUserEmail: '', receiverUserID: '',),
+        ChatScreen(
+          receiverUserEmail: '',
+          receiverUserID: '',
+        ),
       ][currentPageIndex],
     ));
   }
-} 
+}
