@@ -55,8 +55,8 @@ class _MainContainerState extends State<MainContainer> {
         CreatePostScreen(),
         NewsScreen(),
         YourProfileScreen(),
-        ChatScreen(),
+        ChatScreen(receiverUserEmail: '', receiverUserID: '',),
       ][currentPageIndex],
     ));
   }
-}
+} 
