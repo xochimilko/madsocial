@@ -16,7 +16,6 @@ dependencies:
 
   news_api_flutter_package: ^1.2.0
 
-  provider: ^6.1.2
 
 
 dev_dependencies:
