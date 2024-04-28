@@ -12,7 +12,6 @@ class _CreatePostScreenState extends State
 {
   String _postText = ''; // Initialize _postText variable
 
-  // Rest of the code remains unchanged
 
 
   // Function to handle uploading post to Firestore
