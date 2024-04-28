@@ -13,10 +13,7 @@ import 'package:flutter/foundation.dart'
 /// await Firebase.initializeApp(
 ///   options: DefaultFirebaseOptions.currentPlatform,
 /// );
-/// ```-
-///
-///, j nb dxq sa.
-///
+/// ```
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
@@ -30,10 +27,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.macOS:
         return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -75,10 +69,21 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyA8SAAF2Z1P1khBIL5kMOiaCLpXS72NSRo',
-    appId: '1:874410386112:ios:c3df03a69913273f28c325',
+    appId: '1:874410386112:ios:612ca0ec2855c80228c325',
     messagingSenderId: '874410386112',
     projectId: 'madproj-2d69d',
     storageBucket: 'madproj-2d69d.appspot.com',
-    iosBundleId: 'com.example.madsocialproj2.RunnerTests',
+    iosBundleId: 'com.example.madsocialproj2',
   );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyBwidlniFfneyd9fIj5H-aMb-w61qFieSQ',
+    appId: '1:874410386112:web:c650e3c5fb49fcdb28c325',
+    messagingSenderId: '874410386112',
+    projectId: 'madproj-2d69d',
+    authDomain: 'madproj-2d69d.firebaseapp.com',
+    storageBucket: 'madproj-2d69d.appspot.com',
+    measurementId: 'G-Z31GXYR0P1',
+  );
+
 }

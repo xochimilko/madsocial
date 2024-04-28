@@ -42,14 +42,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       email: _emailController.text,
                       password: _passwordController.text);
                   if (message!.contains('success')) {
-                    print("Error");
-                  } else
                     print(message);
-
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => MainContainer()),
-                  );
+                  } else {
+                    print('you have logged in.');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MainContainer()),
+                    );
+                  }
                 },
                 child: Text('Login'),
               ),
